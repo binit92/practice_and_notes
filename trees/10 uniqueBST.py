@@ -1,0 +1,19 @@
+
+def numTrees(n):
+    # numTree[3] = numTree[0] * numTree(2) +
+    #            = numTree[1] * numTree(1) +
+    #            = numTree[2] * numTree(0)
+
+    numTree = [1] * (n + 1)
+
+    # 0 nodes = 1 tree
+    # 1 nodes = 1 tree
+    for nodes in range(2, n+1):
+        total = 0
+        for root in range(1,nodes):
+            left = root-1
+            right = nodes - root
+            total += numTree[left] * numTree[right]
+        numTree[nodes] = total
+
+    return numTree[n]
